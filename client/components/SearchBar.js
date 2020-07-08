@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View, TextInput } from "react-native";
 
-export default function UselessTextInput() {
+export default function SearchBar() {
   const [value, onChangeText] = useState();
   console.log(value);
   return (

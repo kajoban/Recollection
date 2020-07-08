@@ -12,7 +12,7 @@ export default function App() {
 const styles = StyleSheet.create({
   title: {
     fontFamily: "Roboto_700Bold",
-    fontSize: 35,
+    fontSize: 25,
     marginVertical: 20,
     marginHorizontal: 10,
   },
