@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
+import DefinitionCard from "./DefinitionCard";
 
 export default function Definition() {
   return (
@@ -7,6 +8,10 @@ export default function Definition() {
       <View style={styles.TitleRow}>
         <Text style={styles.definitionTitle}>Bark</Text>
         <Text style={styles.definitionPronouce}>/bärk/</Text>
+      </View>
+      <View>
+        <DefinitionCard />
+        <DefinitionCard />
       </View>
     </View>
   );
