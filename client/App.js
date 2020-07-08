@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, ScrollView, Text } from "react-native";
 import {
   useFonts,
@@ -18,6 +18,9 @@ export default function App() {
     Roboto_500Medium,
   });
 
+  const [query, setQuery] = useState([]);
+  console.log("query is: ", query);
+
   if (!fontsLoaded) {
     return (
       <ScrollView contentContainerStyle={styles.container}>
@@ -29,7 +32,7 @@ export default function App() {
     return (
       <ScrollView contentContainerStyle={styles.container}>
         <Title />
-        <SearchBar />
+        <SearchBar setQuery={setQuery} />
         <Definition />
         <StatusBar style="auto" />
       </ScrollView>
@@ -42,6 +45,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     marginVertical: 50,
-    marginHorizontal: 30,
+    marginHorizontal: 20,
   },
 });

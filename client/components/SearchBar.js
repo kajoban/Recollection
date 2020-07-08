@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, TextInput } from "react-native";
 
-export default function SearchBar() {
-  const [value, onChangeText] = useState();
-  console.log(value);
+export default function SearchBar(props) {
+  const [value, onSubmitEditing] = useState();
+
+  useEffect(() => {
+    props.setQuery(value);
+  }, [value]);
+
   return (
     <View>
       <TextInput
         style={styles.searchBar}
-        onChangeText={(text) => onChangeText(text)}
-        value={value}
+        onSubmitEditing={(text) => onSubmitEditing(text.nativeEvent.text)}
         placeholder="Search"
       />
     </View>
