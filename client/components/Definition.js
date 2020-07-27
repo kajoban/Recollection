@@ -1,20 +1,25 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
-import DefinitionCard from "./DefinitionCard";
+import DefinitionList from "./DefinitionList";
 
-export default function Definition() {
-  return (
-    <View style={styles.definitionContainer}>
-      <View style={styles.TitleRow}>
-        <Text style={styles.definitionTitle}>Bark</Text>
-        <Text style={styles.definitionPronouce}>/bärk/</Text>
+export default function Definition({ definitionData }) {
+  if (definitionData && definitionData.definitions) {
+    return (
+      <View style={styles.definitionContainer}>
+        <View style={styles.TitleRow}>
+          <Text style={styles.definitionTitle}>{definitionData.word}</Text>
+          <Text style={styles.definitionPronouce}>
+            {definitionData.pronunciation}
+          </Text>
+        </View>
+        <View>
+          <DefinitionList definitions={definitionData.definitions} />
+        </View>
       </View>
-      <View>
-        <DefinitionCard />
-        <DefinitionCard />
-      </View>
-    </View>
-  );
+    );
+  } else {
+    return <></>; //should add a "search now..." component/text
+  }
 }
 const styles = StyleSheet.create({
   definitionTitle: {

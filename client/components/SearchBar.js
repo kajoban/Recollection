@@ -12,7 +12,9 @@ export default function SearchBar(props) {
     <View>
       <TextInput
         style={styles.searchBar}
-        onSubmitEditing={(text) => onSubmitEditing(text.nativeEvent.text)}
+        onSubmitEditing={(text) =>
+          onSubmitEditing(text.nativeEvent.text.trim())
+        }
         placeholder="Search"
       />
     </View>

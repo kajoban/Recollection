@@ -1,14 +1,19 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 
-export default function Definition() {
+export default function Definition({ definition }) {
+  let parsedExample;
+  try {
+    parsedExample = definition.example.replace("<b>", "").replace("</b>", "");
+  } catch {
+    parsedExample = null;
+  }
+
   return (
     <View style={styles.definitionCardContainer}>
-      <Text style={styles.definitionType}>noun</Text>
-      <Text style={styles.definitionContent}>
-        the sharp explosive cry of a dog, fox, or seal.
-      </Text>
-      <Text style={styles.definitionExample}>"the bark of a dog"</Text>
+      <Text style={styles.definitionType}>{definition.type}</Text>
+      <Text style={styles.definitionContent}>{definition.definition}</Text>
+      <Text style={styles.definitionExample}>{parsedExample}</Text>
     </View>
   );
 }

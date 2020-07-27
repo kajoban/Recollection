@@ -51,7 +51,7 @@ export default function App() {
       <ScrollView contentContainerStyle={styles.container}>
         <Title />
         <SearchBar setQuery={setQuery} />
-        <Definition />
+        <Definition definitionData={definitionData} />
         <StatusBar style="auto" />
       </ScrollView>
     );
