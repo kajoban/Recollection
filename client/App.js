@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, ScrollView, Text } from "react-native";
 import {
   useFonts,
@@ -18,8 +18,26 @@ export default function App() {
     Roboto_500Medium,
   });
 
-  const [query, setQuery] = useState([]);
+  const [query, setQuery] = useState("");
+  const [definitionData, setDefinitionData] = useState({});
   console.log("query is: ", query);
+
+  useEffect(() => {
+    if (query) {
+      fetch(`https://owlbot.info/api/v4/dictionary/${query}`, {
+        method: "GET",
+        headers: {
+          Authorization: "Token b8dfa09b46183472d87f88183aee80d3aa13b07d",
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+          setDefinitionData(json);
+        })
+        .catch((error) => console.log(error));
+    }
+  }, [query]);
 
   if (!fontsLoaded) {
     return (
