@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 
-export default function Title(props) {
+export default function Subtitle(props) {
   return (
     <View contentContainerStyle={{ alignItems: "left" }}>
-      <Text style={styles.title}>{props.title}</Text>
+      <Text style={styles.title}>{props.subtitle}</Text>
     </View>
   );
 }
@@ -12,8 +12,8 @@ export default function Title(props) {
 const styles = StyleSheet.create({
   title: {
     fontFamily: "Roboto_700Bold",
-    fontSize: 25,
-    marginVertical: 10,
-    marginHorizontal: 10,
+    fontSize: 20,
+    marginVertical: 2,
+    marginHorizontal: 5,
   },
 });

@@ -8,6 +8,7 @@ import {
   Roboto_500Medium,
 } from "@expo-google-fonts/dev";
 import Title from "./components/Title";
+import Subtitle from "./components/Subtitle";
 import SearchBar from "./components/SearchBar";
 import Definition from "./components/Definition";
 
@@ -49,9 +50,10 @@ export default function App() {
   } else {
     return (
       <ScrollView contentContainerStyle={styles.container}>
-        <Title />
+        <Title title={"Recollection"} />
         <SearchBar setQuery={setQuery} />
         <Definition definitionData={definitionData} />
+        <Subtitle subtitle={"Recently Searched"} />
         <StatusBar style="auto" />
       </ScrollView>
     );
