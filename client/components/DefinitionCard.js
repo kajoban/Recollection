@@ -13,7 +13,9 @@ export default function Definition({ definition }) {
     <View style={styles.definitionCardContainer}>
       <Text style={styles.definitionType}>{definition.type}</Text>
       <Text style={styles.definitionContent}>{definition.definition}</Text>
-      <Text style={styles.definitionExample}>{parsedExample}</Text>
+      {parsedExample ? (
+        <Text style={styles.definitionExample}>{parsedExample}</Text>
+      ) : null}
     </View>
   );
 }

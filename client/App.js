@@ -12,6 +12,7 @@ import Title from "./components/Title";
 import Subtitle from "./components/Subtitle";
 import SearchBar from "./components/SearchBar";
 import Definition from "./components/Definition";
+import RecentlySearchedList from "./components/RecentlySearchedList";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -22,8 +23,10 @@ export default function App() {
 
   const [query, setQuery] = useState("");
   const [definitionData, setDefinitionData] = useState({});
+  const [definitionList, setDefinitionList] = useState([]);
 
   storeDefinition = async (definitionToSave) => {
+    //await AsyncStorage.removeItem("SDEF");
     try {
       let definitionArray = [];
       let storedDefinitions = await AsyncStorage.getItem("SDEF");
@@ -31,15 +34,21 @@ export default function App() {
         definitionArray = JSON.parse(storedDefinitions);
         definitionArray.forEach((definition) => {
           if (definition.word === definitionToSave.word) {
-            return;
+            throw "Already searched";
           }
         });
       }
       definitionArray.push(definitionToSave);
       await AsyncStorage.setItem("SDEF", JSON.stringify(definitionArray));
+      getDefinitions();
     } catch (error) {
       console.log(error);
     }
+  };
+
+  getDefinitions = async () => {
+    let storedDefinitions = await AsyncStorage.getItem("SDEF");
+    setDefinitionList(JSON.parse(storedDefinitions));
   };
 
   useEffect(() => {
@@ -60,6 +69,10 @@ export default function App() {
     }
   }, [query]);
 
+  useEffect(() => {
+    getDefinitions();
+  }, []);
+
   if (!fontsLoaded) {
     return (
       <ScrollView contentContainerStyle={styles.container}>
@@ -75,6 +88,7 @@ export default function App() {
           <SearchBar setQuery={setQuery} />
           <Definition definitionData={definitionData} />
           <Subtitle subtitle={"Recently Searched"} />
+          <RecentlySearchedList definitions={definitionList} />
           <StatusBar style="auto" />
         </ScrollView>
       </View>
