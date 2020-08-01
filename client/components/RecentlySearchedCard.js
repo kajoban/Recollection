@@ -5,7 +5,9 @@ export default function RecentlySearched({ definition }) {
   return (
     <View style={styles.recentlySearchedContainer}>
       <Text>
-        <Text style={styles.highlightText}>{definition.word}</Text>:{" "}
+        <Text style={styles.highlightText}>{definition.word}</Text>,{" "}
+        <Text style={styles.italicText}>{definition.definitions[0].type}</Text>:
+        {"\n"}
         {definition.definitions[0].definition}
       </Text>
     </View>
@@ -23,5 +25,8 @@ const styles = StyleSheet.create({
   },
   highlightText: {
     fontFamily: "Roboto_700Bold",
+  },
+  italicText: {
+    fontStyle: "italic",
   },
 });

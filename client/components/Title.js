@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: "Roboto_700Bold",
     fontSize: 25,
-    marginVertical: 10,
+    marginVertical: 15,
     marginHorizontal: 10,
   },
 });
