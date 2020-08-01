@@ -22,30 +22,25 @@ export default function App() {
 
   const [query, setQuery] = useState("");
   const [definitionData, setDefinitionData] = useState({});
-  console.log("query is: ", query);
 
-  // const storeDefinition = async (value) => {
-  //   console.log('storing def')
-  //   try {
-  //     await AsyncStorage.getItem('savedDefinitions', (err, result) => {
-  //       console.log('getting definitions')
-  //       var newDefiniton = {word: value.word, definition: value.definitions[0].definition}
-  //       if (result !== null) {
-  //         console.log('adding to list of definitions')
-  //         var newDefinitons = JSON.parse(result).concat(newDefiniton);
-  //         await AsyncStorage.setItem('savedDefinitions', JSON.stringify(newDefinitons));
-  //         console.log(newDefinitons)
-  //       } else {
-  //         console.log('creating new list of definitons')
-  //         await AsyncStorage.setItem('savedDefinitions', JSON.stringify([newDefiniton]));
-  //         console.log(newDefiniton)
-  //       }
-  //     });
-  //   } catch (e) {
-  //     console.log("error storing definition")
-  //     console.log(e)
-  //   }
-  // }
+  storeDefinition = async (definitionToSave) => {
+    try {
+      let definitionArray = [];
+      let storedDefinitions = await AsyncStorage.getItem("SDEF");
+      if (storedDefinitions !== null) {
+        definitionArray = JSON.parse(storedDefinitions);
+        definitionArray.forEach((definition) => {
+          if (definition.word === definitionToSave.word) {
+            return;
+          }
+        });
+      }
+      definitionArray.push(definitionToSave);
+      await AsyncStorage.setItem("SDEF", JSON.stringify(definitionArray));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (query) {
@@ -59,7 +54,7 @@ export default function App() {
         .then((json) => {
           console.log(json);
           setDefinitionData(json);
-          //storeDefinition(json);
+          storeDefinition(json);
         })
         .catch((error) => console.log(error));
     }
